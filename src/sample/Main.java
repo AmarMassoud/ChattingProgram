@@ -37,7 +37,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         ChatClient client = new ChatClient();
-        client.startConnection("192.168.100.13", 9563);
+        client.startConnection("185.218.124.167", 8089);
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         window = primaryStage;
         in = new BufferedReader(new InputStreamReader(client.getClientSocket().getInputStream()));
@@ -63,6 +63,7 @@ public class Main extends Application {
         mainLayout.getChildren().add(sendButton);
         sendButton.setTranslateY(50);
         mainLayout.getChildren().add(textField);
+        mainScene.getStylesheets().add("sample/MainCSS.css");
         window.show();
     }
 
