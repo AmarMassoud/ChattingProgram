@@ -34,4 +34,8 @@ public class ChatClient {
         out.close();
         clientSocket.close();
     }
+
+    public Socket getClientSocket() {
+        return clientSocket;
+    }
 }
