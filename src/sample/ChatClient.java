@@ -24,8 +24,9 @@ public class ChatClient {
     }
     public String sendMessage(String message) throws Exception{
         out.println(message);
-        String response = in.readLine();
-        return response;
+//        String response = in.readLine();
+//        return response;
+        return "";
 
 
     }
