@@ -47,7 +47,7 @@ public class Main extends Application {
 
 
         ChatClient client = new ChatClient();
-        client.startConnection("185.218.124.167", 8089);
+        client.startConnection("127.0.0.1", 8089); // 185.218.124.167
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         window = primaryStage;
         in = new BufferedReader(new InputStreamReader(client.getClientSocket().getInputStream()));
@@ -91,13 +91,21 @@ public class Main extends Application {
         scrollPane.setPannable(true);
         mainLayout.getChildren().add(scrollPane);
         mainLayout.getChildren().add(chatText);
+        scrollPane.setMaxHeight(500);
+        scrollPane.vvalueProperty().bind(chatText.heightProperty());
 
         mainLayout.getChildren().add(sendButton);
-        sendButton.setTranslateY(50);
+        sendButton.setTranslateY(300);
+        sendButton.setTranslateX(250);
+        scrollPane.setMinViewportHeight(50);
+        sendMessageField.setTranslateY(300);
+        sendMessageField.setTranslateX(-50);
+        sendMessageField.setMaxSize(500, 50);
         mainLayout.getChildren().add(sendMessageField);
         mainScene.getStylesheets().add("sample/MainCSS.css");
         nameScene.getStylesheets().add("sample/MainCSS.css");
         window.show();
+
 
 
 
