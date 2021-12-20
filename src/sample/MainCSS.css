@@ -1,3 +1,17 @@
 .root{
+ -fx-background-color: black;
+}
+.scroll-pane{
+ -fx-background-color: black;
+ -fx-background: black;
+}
+.text-field{
+ -fx-background-color: grey;
+}
+.button{
  -fx-background-color: gray;
+}
+.label{
+ -fx-font-size: 20;
+ -fx-text-fill: grey;
 }

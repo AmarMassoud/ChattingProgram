@@ -27,15 +27,25 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 public class Main extends Application {
      static javafx.scene.control.Label chatText = new Label("");
     ScrollPane scrollPane = new ScrollPane();
-    TextField textField = new TextField();
+    TextField sendMessageField = new TextField();
+
+    TextField nameField = new TextField();
+    Button okNameButton = new Button("OK");
+    Label nameLabel = new Label("Please enter your name");
+    StackPane nameLayout = new StackPane();
+    Scene nameScene = new Scene(nameLayout, 700, 700);
+
+
 
     Stage window;
     StackPane mainLayout = new StackPane();
     Button sendButton = new Button("Send");
-    Scene mainScene = new Scene(mainLayout, 400, 400);
+    Scene mainScene = new Scene(mainLayout, 700, 700);
     BufferedReader in;
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+
         ChatClient client = new ChatClient();
         client.startConnection("185.218.124.167", 8089);
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
@@ -43,17 +53,39 @@ public class Main extends Application {
         in = new BufferedReader(new InputStreamReader(client.getClientSocket().getInputStream()));
         new Thread(() -> chat()).start();
         sendButton.setOnAction(event -> {
-            String text = textField.getText();
+            String text = sendMessageField.getText();
             try {
                 System.out.println(client.sendMessage(text));
+                sendMessageField.clear();
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
 
         });
+        okNameButton.setOnAction(event -> {
+            if(!nameField.getText().trim().isEmpty()) {
+                try {
+                    client.sendMessage("/setname " + nameField.getText());
+                    window.setScene(mainScene);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                nameLabel.setText("Invalid name, please do not use an empty name. enter your name.");
+            }
 
-        window.setScene(mainScene);
+
+        });
+
+
+        window.setScene(nameScene);
+        nameLayout.getChildren().add(nameField);
+        nameLayout.getChildren().add(okNameButton);
+        okNameButton.setTranslateY(50);
+        nameLayout.getChildren().add(nameLabel);
+        nameLabel.setTranslateY(-50);
+
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scrollPane.setContent(chatText);
         scrollPane.setPannable(true);
@@ -62,9 +94,13 @@ public class Main extends Application {
 
         mainLayout.getChildren().add(sendButton);
         sendButton.setTranslateY(50);
-        mainLayout.getChildren().add(textField);
+        mainLayout.getChildren().add(sendMessageField);
         mainScene.getStylesheets().add("sample/MainCSS.css");
+        nameScene.getStylesheets().add("sample/MainCSS.css");
         window.show();
+
+
+
     }
 
     public void chat(){
