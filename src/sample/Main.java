@@ -125,6 +125,19 @@ public class Main extends Application {
 
         });
 
+        window.setOnCloseRequest(e -> {
+            try {
+                System.out.println("Closing the connection.");
+                client.stop();
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+
+        });
+
+
+
+
         connectionErrorLayout.getChildren().add(connectionErrorLabel);
         connectionErrorScene.getStylesheets().add("sample/MainCSS.css");
         connectionErrorLabel.setId("errorLabel");
