@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="ChattingProgram:jar">
+  <artifact type="jar" name="Chatting Program:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Chatting Program_jar</output-path>
     <root id="archive" name="ChattingProgram.jar">
       <element id="module-output" name="ChattingProgram" />

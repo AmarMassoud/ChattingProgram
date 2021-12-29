@@ -25,6 +25,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
@@ -111,7 +114,6 @@ public class Main extends Application {
                 if (!nameField.getText().trim().isEmpty()) {
                     try {
                         client.sendMessage("/setname " + nameField.getText());
-                        nameField.clear();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -170,13 +172,27 @@ public class Main extends Application {
             while (true) {
                 String input = in.readLine();
                 System.out.println(input);
-
+                String str[] = input.split(" ");
+                List<String> al = new ArrayList<String>();
+                al = Arrays.asList(str);
+                List<String> finalAl = al;
                 Platform.runLater(() -> {
                     if (input.contains("name is wrong")) {
                         nameLabel.setText("The name has already been used. Please use another name.");
+                        System.out.println("1st if");
                     } else {
-                        window.setScene(mainScene);
-                        sendMessageField.requestFocus();
+                        try {
+
+                            List<String> name = finalAl.subList(5, finalAl.size());
+                            String names = String.join(" ", name);
+                            if (names.equalsIgnoreCase(nameField.getText()) || (finalAl.get(0).equalsIgnoreCase(nameField.getText() + ":"))) {
+                                nameField.clear();
+                                window.setScene(mainScene);
+                                sendMessageField.requestFocus();
+                                System.out.println("3rd if");
+                            }
+                        } catch(ArrayIndexOutOfBoundsException exception) {
+                        }
                     }
                     chatText.setText(chatText.getText() + "\n" + input);
 
