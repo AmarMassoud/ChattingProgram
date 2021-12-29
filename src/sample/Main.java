@@ -191,7 +191,7 @@ public class Main extends Application {
                                 sendMessageField.requestFocus();
                                 System.out.println("3rd if");
                             }
-                        } catch(ArrayIndexOutOfBoundsException exception) {
+                        } catch(ArrayIndexOutOfBoundsException | IllegalArgumentException exception) {
                         }
                     }
                     chatText.setText(chatText.getText() + "\n" + input);
