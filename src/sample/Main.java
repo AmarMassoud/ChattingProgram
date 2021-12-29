@@ -203,8 +203,10 @@ public class Main extends Application {
                                 window.setScene(mainScene);
                                 sendMessageField.requestFocus();
                                 System.out.println("3rd if");
+                                doNothing();
                             }
-                        } catch(ArrayIndexOutOfBoundsException | IllegalArgumentException exception) {
+                        } catch(ArrayIndexOutOfBoundsException | IllegalArgumentException | SocketException | NullPointerException exception) {
+
                         }
                     }
                     chatText.setText(chatText.getText() + "\n" + input);
@@ -222,4 +224,12 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    private void doNothing() throws SocketException{
+    }
+
+
+
 }
+
+
+
