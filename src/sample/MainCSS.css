@@ -7,6 +7,7 @@
 }
 .text-field{
  -fx-background-color: grey;
+ -fx-font-size: 20;
 }
 .button{
  -fx-background-color: gray;
@@ -15,4 +16,8 @@
 .label{
  -fx-font-size: 20;
  -fx-text-fill: grey;
+}
+#errorLabel {
+-fx-text-fill: red;
+
 }
