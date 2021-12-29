@@ -202,9 +202,8 @@ public class Main extends Application {
                                 nameField.clear();
                                 window.setScene(mainScene);
                                 sendMessageField.requestFocus();
-                                doNothing();
                             }
-                        } catch(ArrayIndexOutOfBoundsException | IllegalArgumentException | SocketException | NullPointerException exception) {
+                        } catch(ArrayIndexOutOfBoundsException | IllegalArgumentException | NullPointerException exception) {
 
                         }
                     }
@@ -215,7 +214,10 @@ public class Main extends Application {
 
 
             }
-        } catch (IOException exception) {
+        } catch (SocketException exception) {
+
+        }
+        catch (IOException exception) {
             exception.printStackTrace();
         }
     }
@@ -223,10 +225,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    private void doNothing() throws SocketException{
-    }
-
-
 
 }
 
