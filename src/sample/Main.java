@@ -60,7 +60,7 @@ public class Main extends Application {
         window = primaryStage;
         ChatClient client = new ChatClient();
         try {
-            client.startConnection("185.218.124.167", 8089); // 185.218.124.167
+            client.startConnection("vps.zingyawesome.com", 8089);
             in = new BufferedReader(new InputStreamReader(client.getClientSocket().getInputStream()));
             new Thread(() -> chat()).start();
             window.setScene(nameScene);
@@ -202,7 +202,6 @@ public class Main extends Application {
                                 nameField.clear();
                                 window.setScene(mainScene);
                                 sendMessageField.requestFocus();
-                                System.out.println("3rd if");
                                 doNothing();
                             }
                         } catch(ArrayIndexOutOfBoundsException | IllegalArgumentException | SocketException | NullPointerException exception) {
